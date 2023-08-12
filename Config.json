@@ -1,0 +1,49 @@
+{
+"Build_Machine" :
+{
+"IP_Address" : "10.30.36.78",
+"UserName" : "root",
+"Password" : "qlogic",
+"OS" : "",
+"Repository_Path" : "",
+"BranchName" : "",
+"Build_Full_Path" : ""
+},
+
+"Test_Bed_Machine" :
+{
+"IP_Address" : "10.30.36.78",
+"UserName" : "root",
+"Password" : "qlogic",
+"OS" : "",
+"Repository_Path" : "",
+"BranchName" : "",
+"Coverage_File" : "/root/test.cov",
+"covclear" : "/opt/BullseyeCoverage/bin/covclear",
+"covxml" : "/root/test.xml",
+"Build_Full_Path" : ""
+},
+
+"Test_Launch_Machine" :
+{
+"IP_Address" : "10.30.42.93",
+"UserName" : "Administrator",
+"Password" : "Qlogic01",
+"OS" : "windows",
+"Tests_Folder_Path" : "",
+"BranchName" : "",
+"Test_List_File_Path":"C:\\Dev\\eit_automation\\Configs\\Common\\qTest\\qtesttc.txt",
+"Script_Expensions" : ".py",
+"Tests_Folder_Full_Path" : "",
+"Test_Coverage_Expiry_in_Hrs" : "5"
+},
+
+"Database" : 
+{
+"IP_Address" : "10.30.46.9",
+"UserName" : "apps",
+"Password " : "qlogic",
+"Port" : "27017",
+"DB_Name" : "Smart_Sanity"
+}
+}

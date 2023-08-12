@@ -1,0 +1,139 @@
+Ubuntu IP : 10.30.46.9 / apps/qlogic
+1) Download the deb file from mongodb website for the suitable OS version.
+      https://www.mongodb.com/try/download/community-kubernetes-operator
+	  
+2) Install the mongo db server installer.
+	sudo dpkg -i mongodb-org-server_6.0.6_amd64.deb
+	
+3) Check the installation status, it will be inactive by default.
+	sudo systemctl status mongodb
+	
+4) To start the mongo db	
+	sudo systemctl start mongod
+	
+5) To Operate with installed DB, download install MongoDB Shell from mongo db website.
+	sudo dpkg -i <mongo_sh_installer.deb>
+	
+	mongosh - command to check the status of mongosh with mode details on DB connection.
+	
+	after mongosh 
+		-> show dbs ; list the availabl dbs
+		
+		-> use Test_DB ; this starts using the database "Test_DB", Database "Test_DB" will be created if it does not exists.
+		
+		-> db.createCollection('Student') ; this creates the collection with Name "Student" for storing the details in selected DB (use "Test_DB" ).
+		
+		-> show collections ; this lists the names of collections available in in selected DB (use "Test_DB" ).
+		
+		-> db.students.insert({"Key":"Value"}) ; to insert the data in database.
+	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Making the DB accissiable over n/w:
+1) Edit the mongo config file (sudo nano /etc/mongod.conf) with bindIP : 0.0.0.0 and save.
+2) Restart MongoDB : sudo systemctl restart mongod
+3) check the listen status of mongo appusing - sudo lsof -i | grep mongo
+4) check the status of firewall on port using - sudo ufw status ; status must be inactive
+	to allow : sudo ufw allow <machine_IP> port 27017
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+To communicate the DB using python script , Refer : https://www.w3schools.com/python/python_mongodb_insert.asp
+File store in mongodb using puthon  : https://www.youtube.com/watch?v=KSB5g8qt9io
+
+pip install pymongo
+
+>>> import pymongo
+>>>
+>>>
+>>> myclient = pymongo.MongoClient("mongodb://10.30.46.9:27017/")
+>>>
+>>>
+>>> mydb = myclient['Test_DB']
+
+
+Sample DB : Test_DB
+Sample Collection : Student
+
+---------------------
+Insert_one: Data must be in the form of Dict.
+
+ 
+myclient = pymongo.MongoClient("mongodb://10.30.46.109:27017/")
+db_obj = myclient.DB_Name
+
+collection_obj = db_obj.Collection_Name
+
+Data = {"TestName" : "Test1" ,"Coverage" : {"Src_1":{"Function2":{"condition":[], "decision" : [] , "switch-label" : [] , "block" :[] }}}
+				  {"Src_3":{"Function9":{"condition":[], "decision" : [] , "switch-label" : [] , "block" :[] }}}
+	   }
+
+result = collection_obj.insert_one(Data)
+
+-----------------
+Insert_Many: Data must be in the form of list of dicts
+
+
+Data = ["TestName" : "Test3" ,"Coverage" : {"Src_1":{"Function2":{"condition":[], "decision" : [] , "switch-label" : [] , "block" :[] }}}
+				  {"Src_3":{"Function9":{"condition":[], "decision" : [] , "switch-label" : [] , "block" :[] }}}
+	   },
+	   
+	   {"TestName" : "Test4" ,"Coverage" : {"Src_8":{"Function1":{"condition":[], "decision" : [] , "switch-label" : [] , "block" :[] }}}, "date_time" : datetime.datetime(2023, 2, 3, 4, 5)
+				  {"Src_3":{"Function4":{"condition":[], "decision" : [10,48] , "switch-label" : [] , "block" :[] }}}
+	   }]
+
+result = collection_obj.insert_one(Data)
+
+----------------------------
+Retrieve Items :
+
+1) Retrieve first Item:
+	result = collection_obj.find_one()
+	print(result)
+	
+2) Retrieve Particular one:
+	result = collection_obj.find_one({"TestName" : "Test3"})
+	print(result)
+	
+	or
+	
+	result = collection_obj.find_one({"decision" : "48"})  # this retrives the Test4 Document.
+	print(result)
+	
+	or 
+	# retrieve using ID.
+	from bson.objectid import ObjectId
+	result = collection_obj.find_one("_id" : ObjectId("Data_ID of Doc"))  # this retrives the Test4 Document.
+	print(result)
+	
+---------------------
+Count_Documents:
+
+	collection_obj.count_documents({})  # counts total documents
+	
+	collection_obj.count_documents({decision:10}) # results counts of decision:10
+	
+---------------------
+Query selecton : $eq, $gt , $gte , $in - Mathes value in an Array. , $lt , $lte , $ne , 
+
+d = datetime.datatime(2022,3 , 4)
+
+results = collection_obj.find({"date_time" : {"$lt" : d}}) , find the documents of datetime before datetime obj d.
+
+results = collection_obj.find({"date_time" : {"$gt" : d}}) , find the documents of datetime after datetime obj d.
+	
+		collection_obj.find({"date_time" : {"$gt" : d}}).sort(Key)
+		
+		
+-----------------------------
+Delete Item :
+		collection_obj.delete_one({"TestName" : "Test3"}) # removes the particular document.
+		collection_obj.delete_one({})  # an empty dict as an argument to delete functions will results in deletions of all docuements.
+		
+---------------------------------------	
+Update:
+		collection_obj.update_one( search_with_query, New_Values)
+		collection_obj.update_one( {"TestName" : "Test4"}, {"$set" : {"Coverage" : {new_Coverage_Data}}}), this call will add the Coverage Key if it dosent exists.
+		
+--------------------------------------
+Remove particulat nested object:
+		collection_obj.update_one( {"TestName" : "Test4"}, {"$unset" : {"Coverage" : None}})
+	

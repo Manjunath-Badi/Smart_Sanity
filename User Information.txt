@@ -1,0 +1,7 @@
+DB Name : Smart_Sanity
+
+Collections:
+1) Test_List        ; Stores all tests lists with previous execution records.
+2) Coverage_Record  ; Stores actual code coverage of each test.
+3) Test_Execution_Report ; Stores the results  of batch of tests execuited in last checkin.
+4) Coverage_Recording_Tests ; stores the list of tests selected for coverage run based on expiry time/never ran.
