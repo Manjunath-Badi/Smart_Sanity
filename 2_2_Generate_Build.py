@@ -24,12 +24,12 @@ class Generate_Coverage_Build():
                 
     def Prepare_Build(self):
         # Need to impliment Normal Build Generation and copying the build to Test Machine through SSH.
-        pass
+        time.sleep(10)
         
 
 if __name__ == "__main__":
 
-    Coverage_Build_Obj = Generate_Coverage_Build('Config.json')
+    Coverage_Build_Obj = Generate_Coverage_Build('/home/SmartSanity/Config.json')
     Coverage_Build_Obj.Parse_Config()
     Coverage_Build_Obj.Prepare_Build()
 

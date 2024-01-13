@@ -1,7 +1,7 @@
 {
 "Build_Machine" :
 {
-"IP_Address" : "10.30.36.78",
+"IP_Address" : "10.30.45.232",
 "UserName" : "root",
 "Password" : "qlogic",
 "OS" : "",
@@ -12,35 +12,35 @@
 
 "Test_Bed_Machine" :
 {
-"IP_Address" : "10.30.36.78",
+"IP_Address" : "10.31.41.196",
 "UserName" : "root",
 "Password" : "qlogic",
 "OS" : "",
-"Repository_Path" : "",
+"Repository_Path" : "/home/qla2xxx/qla2xxx-v10.2.x.y/drivers/scsi/qla2xxx",
 "BranchName" : "",
 "Coverage_File" : "/root/test.cov",
 "covclear" : "/opt/BullseyeCoverage/bin/covclear",
-"covxml" : "/root/test.xml",
+"covxml" : "/opt/BullseyeCoverage/bin/covxml",
 "Build_Full_Path" : ""
 },
 
 "Test_Launch_Machine" :
 {
-"IP_Address" : "10.30.42.93",
+"IP_Address" : "10.31.41.210",
 "UserName" : "Administrator",
 "Password" : "Qlogic01",
 "OS" : "windows",
 "Tests_Folder_Path" : "",
 "BranchName" : "",
-"Test_List_File_Path":"C:\\Dev\\eit_automation\\Configs\\Common\\qTest\\qtesttc.txt",
+"Test_List_File_Path":"C:\\Dev-ps\\eit_automation\\Configs\\Common\\qTest\\Sanity_qtesttc.txt",
 "Script_Expensions" : ".py",
 "Tests_Folder_Full_Path" : "",
-"Test_Coverage_Expiry_in_Hrs" : "5"
+"Test_Coverage_Expiry_in_Hrs" : "1000"
 },
 
 "Database" : 
 {
-"IP_Address" : "10.30.46.9",
+"IP_Address" : "10.31.61.158",
 "UserName" : "apps",
 "Password " : "qlogic",
 "Port" : "27017",

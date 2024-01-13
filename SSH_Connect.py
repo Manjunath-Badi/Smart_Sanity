@@ -21,4 +21,5 @@ class SSH_Connect():
     def Execute(self, Command):
         print(f'SSH Cmd : {Command}')
         self.stdin, self.stdout, self.stderr = self.ssh.exec_command(Command)
+        self.exit_status = self.stdout.channel.recv_exit_status()
         self.Response = self.stdout.readlines()
